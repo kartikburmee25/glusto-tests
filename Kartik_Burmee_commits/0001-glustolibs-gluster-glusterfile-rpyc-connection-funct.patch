@@ -1,0 +1,36 @@
+From 6d1a0615f6d6f925a90ab508895809e42fa23bd9 Mon Sep 17 00:00:00 2001
+From: Kartik_Burmee <kburmee@redhat.com>
+Date: Mon, 2 Apr 2018 04:06:18 +0530
+Subject: [PATCH] glustolibs/gluster/glusterfile: rpyc connection function call
+
+changed get_connection to rpyc_get_connection.
+executed a test case after this change and got
+this error - "error while loading shared libraries:
+libglusterfs.so.0 cannot open shared object file:
+No such file or directory".
+solved this path issue by adding shared library to
+system library path on my machine. Not sure if it'll
+be a common issue for everyone using this module.
+
+Change-Id: Id52df4b17bc3d30b808bb1eb77c87b03c3ed2f7b
+Signed-off-by: Kartik_Burmee <kburmee@redhat.com>
+---
+ glustolibs-gluster/glustolibs/gluster/glusterfile.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glustolibs-gluster/glustolibs/gluster/glusterfile.py b/glustolibs-gluster/glustolibs/gluster/glusterfile.py
+index fcc10f2..9b9b57f 100644
+--- a/glustolibs-gluster/glustolibs/gluster/glusterfile.py
++++ b/glustolibs-gluster/glustolibs/gluster/glusterfile.py
+@@ -49,7 +49,7 @@ def calculate_hash(host, filename):
+         glusterfs = ctypes.cdll.LoadLibrary("libglusterfs.so.0")
+         g.log.debug("Library libglusterfs.so.0 loaded locally")
+     except OSError:
+-        conn = g.get_connection(host)
++        conn = g.rpyc_get_connection(host)
+         glusterfs = \
+             conn.modules.ctypes.cdll.LoadLibrary("libglusterfs.so.0")
+         g.log.debug("Library libglusterfs.so.0 loaded via rpyc")
+-- 
+2.30.1 (Apple Git-130)
+

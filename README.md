@@ -1,3 +1,21 @@
+# About
+
+This is a personal frozen fork of the glusto-tests respository.
+The purpose of this fork is to showcase my contribution towards the automation of
+regression test suite for glusterfs.
+
+To see a list of my code commits, you can use the following 2 methods -
+
+View the patch files under the directory 'Kartik_Burmee_commit'
+
+OR
+
+Use the following commands in the command line terminal to view individual commits -
+
+1. git clone https://github.com/kartikburmee25/glusto-tests.git
+2. git log --all --grep='Signed-off-by: Kartik_Burmee <kburmee@redhat.com>'
+3. git show <commit hash id>
+
 # Glusto Tests
 
 `glusto-tests` repo contains automated testcases for testing gluster software.
